@@ -1,29 +1,23 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Table
-export class User extends Model<User> {
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
+@Entity('Users')
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column({
-    type: DataType.STRING,
-    unique: true,
-    allowNull: false,
-  })
+  @Column({ type: 'varchar', length: 255, unique: true, nullable: false })
   email: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   password: string;
+
   @Column({
-    type: DataType.ENUM,
-    values: ['male', 'female'],
-    allowNull: false,
+    type: 'enum',
+    enum: ['male', 'female'],
+    nullable: false,
   })
   gender: string;
 }

@@ -19,7 +19,7 @@ export class AuthService {
     if (!match) {
       return null;
     }
-    const { password, ...result } = user['dataValues'];
+    const { password, ...result } = user;
     return result;
   }
 
@@ -31,7 +31,7 @@ export class AuthService {
   public async create(user) {
     const pass = await this.hashPassword(user.password);
     const newUser = await this.usersService.create({ ...user, password: pass });
-    const { password, ...result } = newUser['dataValues'];
+    const { password, ...result } = newUser;
     const token = await this.generateToken(result);
     return { user: result, token };
   }

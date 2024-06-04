@@ -1,34 +1,27 @@
 import {
-  Table,
+  Entity,
+  PrimaryGeneratedColumn,
   Column,
-  Model,
-  DataType,
-  ForeignKey,
-  BelongsTo,
-} from 'sequelize-typescript';
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { User } from '../users/user.entity';
 
-@Table
-export class Post extends Model<Post> {
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
+@Entity('Posts')
+export class Post {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'varchar', length: 255, nullable: false })
   title: string;
 
-  @Column({
-    type: DataType.TEXT,
-    allowNull: false,
-  })
+  @Column({ type: 'text', nullable: false })
   body: string;
 
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
+  @Column({ type: 'int', nullable: false })
   userId: number;
 
-  @BelongsTo(() => User)
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'userId' })
   user: User;
 }
