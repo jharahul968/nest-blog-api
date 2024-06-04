@@ -1,0 +1,45 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="rahul (generated)" id="1717485443316-1">
+        <createTable tableName="Posts">
+            <column autoIncrement="true" name="id" startWith="8" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Posts_pkey"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userId" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rahul (generated)" id="1717485443316-2">
+    <sql>CREATE TYPE USERS_GENDER_ENUM AS ENUM ('male', 'female')</sql>
+        <createTable tableName="Users">
+            <column autoIncrement="true" name="id" startWith="15" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Users_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="USERS_GENDER_ENUM">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rahul (generated)" id="1717485443316-3">
+        <addUniqueConstraint columnNames="email" constraintName="Users_email_key" tableName="Users"/>
+    </changeSet>
+    <changeSet author="rahul (generated)" id="1717485443316-4">
+        <addForeignKeyConstraint baseColumnNames="userId" baseTableName="Posts" constraintName="FK_a8237eded7a9a311081b65ed0b8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="Users" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
