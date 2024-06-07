@@ -4,6 +4,7 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { PostsModule } from './modules/posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { LiquibaseService } from './modules/liquibase/liquibase.service';
 import ormConfig from '../ormconfig';
 
 @Module({
@@ -14,5 +15,6 @@ import ormConfig from '../ormconfig';
     AuthModule,
     PostsModule,
   ],
+  providers: [LiquibaseService],
 })
 export class AppModule {}
